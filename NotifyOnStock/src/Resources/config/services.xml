@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="NotifyOnStock\Service\ReadingData" >
+            <argument type="service" id="product.repository"/>
+        </service>
+
+        <service id="NotifyOnStock\Storefront\Controller\ProductAlertController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="NotifyOnStock\Service\ReadingData"/>
+        </service>
+
+        <service id="NotifyOnStock\Entity\ProductAlertEntityDefinition">
+            <tag name="shopware.entity.definition" entity="product_alert" />
+        </service>
+
+    </services>
+</container>

@@ -1,0 +1,41 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/buy-widget.html.twig' %}
+
+{% block page_product_detail_delivery_informations %}
+    {{ parent() }}
+
+    {# @var product \Shopware\Core\Content\Product\SalesChannel\SalesChannelProductEntity #}
+    {% set product = page.product %}
+
+    {% if not product.available %}
+        <form id="page-product-detail-notification-on-stock-form"
+              action="{% block page_product_detail_notification_on_stock_form_action %}{{path('frontend.producktalert', {'productName': product.name|replace({' ': '-', ',': ''}), 'productNumber': product.productNumber})}}{% endblock %}"
+              method="post"
+              class="buy-widget"
+              data-product-alert="true">
+            {{ sw_csrf('frontend.producktalert', {'productName': product.name|replace({' ': '-'}), 'productNumber': product.productNumber}) }}
+            <div class="page-product-detail-notification-on-stock"
+                 style="border: 2px solid; border-color: lightgray; padding: 10px; text-align: center; margin-left: auto; margin-right: auto; padding-top: 20px; padding-bottom: 20px">
+                <input type="hidden" name="productId" value="{{ product.id }}">
+                <input type="email" class="form-group col-md-7 input-Email-notification"
+                       placeholder="Email address"
+                       required="required">
+                <select class="form-select col-md-4 select-email-notification-language"
+                        style="height:40px">
+                    <option value="1">German</option>
+                    <option value="2">English</option>
+                </select>
+                <div class="form-inline" style="padding-left: 15px">
+                    <select class="form-select col-md-2 select-product-notification-quantity"
+                            style="height:40px">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary col-md-9 btn-send-notification"
+                            style="height:40px; margin-left: 20px">Submit</button>
+                </div>
+            </div>
+        </form>
+    {% endif %}
+{% endblock %}

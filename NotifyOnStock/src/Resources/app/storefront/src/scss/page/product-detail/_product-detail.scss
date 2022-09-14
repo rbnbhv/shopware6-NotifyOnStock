@@ -1,0 +1,7 @@
+.input-Email-notification {
+  height:40px;
+  &:focus {
+    outline: none;
+    border: 2px solid $primary;
+  }
+}
