@@ -1,11 +1,13 @@
 {% sw_extends '@Storefront/storefront/base.html.twig' %}
 
 {% block base_content %}
-    <h1>You have been successfully registered to our notification alert. You will receive an Email soon!</h1>
+    {# @var text \Shopware\Core\Content\Product\SalesChannel\SalesChannelProductEntity #}
+
+    <h1> {{ text }} </h1>
     <form id="page-product-detail-notification-on-stock-form-home"
           action="/">
         <div class="page-product-detail-notification-on-stock-home"
-             style="padding: 10px; text-align: center; margin-left: auto; margin-right: auto; padding-top: 20px; padding-bottom: 20px">
+             style="text-align: center; margin-left: auto; margin-right: auto; padding: 20px 10px;">
 
             <button type="submit" class="btn btn-primary col-md-2 btn-home"
                     style="height:40px; margin-left: 20px">Home page</button>
