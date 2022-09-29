@@ -13,9 +13,10 @@ class ProductAlertEntity extends Entity
     use EntityIdTrait;
 
     protected string $email;
-    protected string $language;
+    protected string $languageId;
     protected int $quantity;
     protected string $status;
+    protected array $context;
 
     /**
      * @return string
@@ -36,17 +37,17 @@ class ProductAlertEntity extends Entity
     /**
      * @return string
      */
-    public function getLanguage(): string
+    public function getLanguageId(): string
     {
-        return $this->language;
+        return $this->languageId;
     }
 
     /**
-     * @param string $language
+     * @param string $languageId
      */
-    public function setLanguage(string $language): void
+    public function setLanguageId(string $languageId): void
     {
-        $this->language = $language;
+        $this->languageId = $languageId;
     }
 
     /**
@@ -81,5 +82,24 @@ class ProductAlertEntity extends Entity
         $this->status = $status;
     }
 
+    public function getSalesChannelId(): string
+    {
+        return $this->sales_channel_id;
+    }
 
+    /**
+     * @return array
+     */
+    public function getContext(): array
+    {
+        return $this->context;
+    }
+
+    /**
+     * @param array $context
+     */
+    public function setContext(array $context): void
+    {
+        $this->context = $context;
+    }
 }
