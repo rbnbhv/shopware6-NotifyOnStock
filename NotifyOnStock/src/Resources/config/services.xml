@@ -5,21 +5,66 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="NotifyOnStock\Service\ReadingData" >
+        <service id="NotifyOnStock\Console\Command\NotificationTableCommand">
+            <tag name="console.command"/>
+            <argument type="service" id="product_alert.repository"/>
+        </service>
+
+        <service id="NotifyOnStock\Service\WriteData" >
+            <argument type="service" id="product_alert.repository"/>
+            <argument type="service" id="language.repository"/>
+        </service>
+
+        <service id="NotifyOnStock\Service\ReadData" >
+            <argument type="service" id="product_alert.repository"/>
+        </service>
+
+        <service id="NotifyOnStock\Resources\Views\Storefront\Page\ProductDetail\test" >
+            <argument type="service" id="product_alert.repository"/>
+            <argument type="service" id="NotifyOnStock\Service\ReadData"/>
+            <argument type="service" id="NotifyOnStock\Service\WriteData"/>
+            <argument type="service" id="NotifyOnStock\Service\MailService\MailService"/>
+        </service>
+
+        <service id="NotifyOnStock\Service\MailService\MailService" >
+            <argument type="service" id="Shopware\Core\Content\Mail\Service\MailService"/>
+            <argument type="service" id="NotifyOnStock\Service\ReadData"/>
+            <argument type="service" id="NotifyOnStock\Service\WriteData"/>
             <argument type="service" id="product.repository"/>
+            <argument type="service" id="seo_url.repository"/>
+            <argument type="service" id="sales_channel_domain.repository"/>
+            <argument type="service" id="mail_template.repository"/>
+            <argument type="service" id="mail_template_translation.repository"/>
+        </service>
+
+        <service id="NotifyOnStock\Service\ScheduledTask\Scheduled24HTask">
+            <tag name="shopware.scheduled.task" />
+        </service>
+
+        <service id="NotifyOnStock\Service\ScheduledTask\Scheduled24HTaskHandler">
+            <argument type="service" id="scheduled_task.repository" />
+            <argument type="service" id="NotifyOnStock\Service\MailService\MailService"/>
+            <tag name="messenger.message_handler" />
         </service>
 
         <service id="NotifyOnStock\Storefront\Controller\ProductAlertController" public="true">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <argument type="service" id="product.repository"/>
-            <argument type="service" id="NotifyOnStock\Service\ReadingData"/>
+            <argument type="service" id="product_alert.repository"/>
+            <argument type="service" id="NotifyOnStock\Service\ReadData"/>
+            <argument type="service" id="NotifyOnStock\Service\WriteData"/>
+            <argument type="service" id="NotifyOnStock\Service\MailService\MailService"/>
         </service>
 
-        <service id="NotifyOnStock\Entity\ProductAlertEntityDefinition">
-            <tag name="shopware.entity.definition" entity="product_alert" />
+        <service id="NotifyOnStock\Entity\ProductAlertDefinition">
+            <tag name="shopware.entity.definition" entity="notification_on_stock" />
         </service>
 
+        <service id="NotifyOnStock\Subscriber\OnProductLoadedSubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="Symfony\Component\HttpFoundation\RequestStack"/>
+            <argument type="service" id="NotifyOnStock\Service\MailService\MailService"/>
+        </service>
     </services>
 </container>
