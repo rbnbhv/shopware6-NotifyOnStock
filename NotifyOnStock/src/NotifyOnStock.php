@@ -33,10 +33,8 @@ class NotifyOnStock extends Plugin
          *    - [] Wie speichern wir Daten in die Datenbanktabelle (Wie funktioniert die Migration?)
          *    - [] Einträge in Liste speichern (Form übergeben und Daten abspeichern)
          *    - [] Entitys festlegen für die Liste
-         *
          *    - [X] Datenbanktabelle erstellen für Notification
          *    - [] Datensätze in die Tabelle speichern / übergeben
-         *    - []
          */
     }
 }
