@@ -22,5 +22,5 @@
 ## How To
 - If the product is out of stock the customer can register to get notified via mail when the article is back in stock again
 
-## Coming
+## Coming up
 - You also can get insights into who subscribed for stock notifications via the administration
