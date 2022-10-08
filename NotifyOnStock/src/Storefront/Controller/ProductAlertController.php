@@ -35,9 +35,6 @@ class ProductAlertController extends StorefrontController
     public function submit(Request $request): Response
     {
         $session = $request->getSession();
-        $request->request->set('b', '1');
-//      For testing without scheduled Task:
-//        $this->emailService->process();
 
         $textOutput = 'You have already been registered!';
         if ($this->writeData->fillTableWithNewEntity($request, $session->get('context'))) {
