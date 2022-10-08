@@ -105,7 +105,6 @@ class MailService
             if ($this->productRepository->search(new Criteria([$row->get('productId')]), Context::createDefaultContext())->first()->get('availableStock') >= $row->get('quantity') ) {
                 $this->sendMail(Context::createDefaultContext(), $row);
             }
-            continue;
         }
     }
 }
