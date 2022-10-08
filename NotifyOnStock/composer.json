@@ -2,8 +2,8 @@
   "name": "swag/notify-on-stock",
   "description": "Notify on stock plugin",
   "type": "shopware-platform-plugin",
-  "version": "0.0.0",
-  "license": "MIT",
+  "version": "1.1.0",
+  "license": "proprietary",
   "autoload": {
     "psr-4": {
       "NotifyOnStock\\": "src/"
@@ -12,7 +12,7 @@
   "extra": {
     "shopware-plugin-class": "NotifyOnStock\\NotifyOnStock",
     "label": {
-      "de-DE": "Benachrichtige wenn auf Lager plugin",
+      "de-DE": "Benachrichtige wenn Artikel auf Lager plugin",
       "en-GB": "Notify on stock plugin"
     }
   }
